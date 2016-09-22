@@ -17,9 +17,11 @@ namespace Interface {
 		static void Menu() {
 			Console.Clear();
 
-			Console.WriteLine("1. See Status");
-			Console.WriteLine("2. Eat Oranges");
-			Console.WriteLine("3. Grow Tree a Year");
+			TreeStatus();
+
+			Console.WriteLine("E. Eat Oranges");
+			Console.WriteLine("G. Grow Tree a Year");
+			Console.WriteLine("W. Water Tree");
 
 			Console.WriteLine("\nX. Exit");
 			Console.WriteLine("- - - - - - - - - - - - - - -");
@@ -28,23 +30,40 @@ namespace Interface {
 			char KeyPressed = Console.ReadKey().KeyChar;
 
 			switch (Char.ToLower(KeyPressed)) {
-				case '1': TreeStatus(); break;
-				case '2': EatOranges(); break;
-				case '3': GrowTree(); break;
+				case 'e': EatOranges(); break;
+				case 'g': GrowTree(); break;
+				case 'w': WaterTree(); break;
 
 				case 'x': System.Environment.Exit(1); break;
-
+				default: Menu(); break;
 			}
 		}
 
 		static void TreeStatus() {
-			Console.Clear();
+			if (OT.TreeAlive) {
+				Console.WriteLine("Your tree is " + OT.Age + " years old,");
+				Console.WriteLine("and it is " + OT.Height + "m. tall.");
+				Console.WriteLine("You also have " + OT.NumOranges + " Oranges.");
+				WaterLevel();
 
-			Console.WriteLine("Your tree is " + OT.Age + " years old,");
-			Console.WriteLine("and it is " + OT.Height + "m. tall.");
+			} else {
+				Console.WriteLine("Your Tree has died.\a");
+			}
 
-			WaitForKey();
-			Menu();
+			Console.Write("\n\n");
+		}
+
+		static void WaterLevel() {
+			Console.Write("Water: ");
+			Console.Write("[");
+			
+			for (int i = 0; i <= 10; i++) {
+				if (i <= ((int)OT.WaterLevel /10))
+					Console.Write("=");
+				else Console.Write(" ");
+			}
+
+			Console.Write("]\n");
 		}
 
 		static void EatOranges() {
@@ -58,6 +77,11 @@ namespace Interface {
 
 		static void GrowTree() {
 			OT.OneYearPasses();
+			Menu();
+		}
+
+		static void WaterTree() {
+			OT.WaterTree();
 			Menu();
 		}
 

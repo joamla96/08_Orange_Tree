@@ -12,7 +12,7 @@ namespace _08_Orange_Tree
         public void SetupForTest()
         {
             //Arrange
-            orangeTree = new OrangeTree(0,6);
+            orangeTree = new OrangeTree(0,0.1);
         }
 
         [TestMethod]
