@@ -11,7 +11,7 @@ namespace _08_Orange_Tree {
 		public int Age { get { return this.age; } /*set { this.age = value; }*/ }
 		public int Height { get { return this.height; } /*set { this.height = value; }*/ }
 		public bool TreeAlive { get { return this.alive; } set { this.alive = value; } }
-		public int NumOranges { get { return this.numOranges; } set { this.NumOranges = value; } }
+		public int NumOranges { get { return this.numOranges; } set { this.numOranges = value; } }
 		public int OrangesEaten { get { return this.orangesEaten; } set { this.orangesEaten = value; } }
 
 		public OrangeTree(int age, int height) {
@@ -22,6 +22,9 @@ namespace _08_Orange_Tree {
 		internal void OneYearPasses() {
 			this.age++;
 			this.height += 2;
+
+			if(this.age > 1)
+				this.numOranges += 5;
 
 			if (this.age == 80)
 				this.alive = false;
