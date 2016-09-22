@@ -29,7 +29,7 @@ namespace _08_Orange_Tree {
 			this.height += 2;
 
 			if(this.age > 1)
-				this.numOranges += 5;
+				this.numOranges += random.Next(1,5);
 
 			if (this.age >= 80 || waterLevel <= 0)
 				this.treeAlive = false;

@@ -9,6 +9,8 @@ namespace Interface {
 	static class Program {
 		static OrangeTree OT;
 
+		private static bool gameActive = true;
+
 		static void Main(string[] args) {
 			OT = new OrangeTree(0, 6);
 			Menu();
@@ -19,9 +21,12 @@ namespace Interface {
 
 			TreeStatus();
 
-			Console.WriteLine("E. Eat Oranges");
-			Console.WriteLine("G. Grow Tree a Year");
-			Console.WriteLine("W. Water Tree");
+			if (gameActive) {
+				Console.WriteLine("");
+				Console.WriteLine("E. Eat Oranges");
+				Console.WriteLine("G. Grow Tree a Year");
+				Console.WriteLine("W. Water Tree");
+			}
 
 			Console.WriteLine("\nX. Exit");
 			Console.WriteLine("- - - - - - - - - - - - - - -");
@@ -46,11 +51,16 @@ namespace Interface {
 				Console.WriteLine("You also have " + OT.NumOranges + " Oranges.");
 				WaterLevel();
 
-			} else {
-				Console.WriteLine("Your Tree has died.\a");
+			}
+			if(!OT.TreeAlive) { 
+				Console.WriteLine("\n\aYour Tree has died.");
+				gameActive = false;
 			}
 
-			Console.Write("\n\n");
+			if(OT.NumOranges > 100) {
+				Console.WriteLine("\n\aYour oranges has crushed you, and you died.");
+				gameActive = false;
+			}
 		}
 
 		static void WaterLevel() {
@@ -67,6 +77,8 @@ namespace Interface {
 		}
 
 		static void EatOranges() {
+			if (!gameActive) Menu();
+
 			Console.WriteLine("How many Oranges do you want to eat?");
 			int EatOranges = int.Parse(Console.ReadLine());
 			OT.EatOrange(EatOranges);
@@ -76,11 +88,15 @@ namespace Interface {
 		}
 
 		static void GrowTree() {
+			if (!gameActive) Menu();
+
 			OT.OneYearPasses();
 			Menu();
 		}
 
 		static void WaterTree() {
+			if (!gameActive) Menu();
+
 			OT.WaterTree();
 			Menu();
 		}
