@@ -1,25 +1,25 @@
 ﻿using System;
 
 namespace _08_Orange_Tree {
-	internal class OrangeTree {
+	public class OrangeTree {
 		private int age = 0;
 		private int height = 0;
 		private int numOranges = 0;
 		private int orangesEaten = 0;
-		private bool alive = true;
+		private bool treeAlive = true;
 
 		public int Age { get { return this.age; } /*set { this.age = value; }*/ }
 		public int Height { get { return this.height; } /*set { this.height = value; }*/ }
-		public bool TreeAlive { get { return this.alive; } set { this.alive = value; } }
-		public int NumOranges { get { return this.numOranges; } set { this.numOranges = value; } }
-		public int OrangesEaten { get { return this.orangesEaten; } set { this.orangesEaten = value; } }
+		public bool TreeAlive { get { return this.treeAlive; } /*set { this.alive = value; }*/ }
+		public int NumOranges { get { return this.numOranges; } /*set { this.numOranges = value; }*/ }
+		public int OrangesEaten { get { return this.orangesEaten; } /*set { this.orangesEaten = value; }*/ }
 
 		public OrangeTree(int age, int height) {
 			this.age = age;
 			this.height = height;
 		}
 
-		internal void OneYearPasses() {
+		public void OneYearPasses() {
 			this.age++;
 			this.height += 2;
 
@@ -27,11 +27,14 @@ namespace _08_Orange_Tree {
 				this.numOranges += 5;
 
 			if (this.age == 80)
-				this.alive = false;
+				this.treeAlive = false;
 		}
 
-		public void EatOrange(int v1) {
-			throw new NotImplementedException();
+		public void EatOrange(int eating) {
+			if (this.numOranges > eating) {
+				this.orangesEaten += eating;
+				this.numOranges -= eating;
+			} else throw new IndexOutOfRangeException("You can't eat an orange that isn't there!  There are 0 oranges available to eat");
 		}
 	}
 }
