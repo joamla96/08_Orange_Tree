@@ -26,7 +26,7 @@ namespace _08_Orange_Tree {
 			if(this.age > 1)
 				this.numOranges += 5;
 
-			if (this.age == 80)
+			if (this.age >= 80)
 				this.treeAlive = false;
 		}
 
