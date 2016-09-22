@@ -22,6 +22,9 @@ namespace _08_Orange_Tree {
 		internal void OneYearPasses() {
 			this.age++;
 			this.height += 2;
+
+			if (this.age == 80)
+				this.alive = false;
 		}
 
 		public void EatOrange(int v1) {
